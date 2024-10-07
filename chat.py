@@ -43,14 +43,14 @@ def suggest_candidates_based_on_skill(skill):
     return matching_candidates
 
 # Streamlit UI starts here
-st.title("CV Chat Analizer")
+st.title("Candidate CV Query and Chatbot with Skill Suggestions")
 
 # Initialize chat history in session state
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 # Text input for the user query
-user_input = st.text_input("Good day, we welcome you.  Mention the skills,progaming language , framework or any if any, that a person you wish to find should have here:")
+user_input = st.text_input("Enter your question or mention a programming language/skill:")
 
 # Initialize found_candidates to avoid NameError
 found_candidates = []
@@ -101,8 +101,12 @@ if found_candidates:
         st.session_state.chat_history.append(f"You: {specific_query}")
         st.session_state.chat_history.append(f"Bot: {bot_response}")
 
-# Reset chat button (optional)
+        # Clear chat history and reset conversation after displaying the final answer
+        if st.button("End Conversation and Clear Chat"):
+            st.session_state.clear()  # Clears the session state including chat history
+            st.experimental_rerun()  # Reruns the app to refresh and open with a clean state
+
+# Reset chat button to clear history mid-conversation
 if st.button("Clear Chat"):
     st.session_state.chat_history = []
-    # No rerun, simply clear the chat history for the user to see immediately
     st.write("Chat history cleared.")
