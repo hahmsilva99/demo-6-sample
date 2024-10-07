@@ -50,7 +50,7 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 # Text input for the user query
-user_input = st.text_input("Good day, we welcome you.  Mention the skills,progaming language , framework or any if any, that a person you wish to find should have here:")
+user_input = st.text_input("Good day, we welcome you.  Mention the skills,progaming language , framework or any if any, that a person you wish to find should have here: (eg : python ,aws)")
 
 # Initialize found_candidates to avoid NameError
 found_candidates = []
